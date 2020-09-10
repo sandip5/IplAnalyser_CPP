@@ -1,13 +1,12 @@
 #include <iostream>
 
-template<typename T>
 class ipl_controller
 {
     ipl_view view;
-    ipl_analyser<T> analyser;
-    
+    ipl_analyser analyser;
+
 public:
-    ipl_controller(ipl_view view, ipl_analyser<T> analyser)
+    ipl_controller(ipl_view view, ipl_analyser analyser)
     {
         this -> view = view;
         this -> analyser = analyser;
@@ -20,7 +19,8 @@ public:
 
     void display_top_batting_avg(std::string fields)
     {
-        ipl_run<T> most_run = analyser.find_data(fields);
-        view.display_top_batting_avg_with_name(most_run.player, most_run.avg);
+        ipl_run most_run = analyser.find_data(fields);
+        view.display_top_batting_avg_with_name(most_run.get_player_name(),
+             most_run.get_average());
     }
 };
