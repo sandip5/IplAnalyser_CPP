@@ -1,12 +1,26 @@
 #include <iostream>
 
+template<typename T>
 class ipl_controller
 {
+    ipl_view view;
+    ipl_analyser<T> analyser;
+    
 public:
-    void show_welcome_message();
-};
+    ipl_controller(ipl_view view, ipl_analyser<T> analyser)
+    {
+        this -> view = view;
+        this -> analyser = analyser;
+    }
 
-void ipl_controller::show_welcome_message()
-{
-    std::cout << "Welcome To Ipl Analyser System" << std::endl;   
-}
+    void show_welcome_message()
+    {
+        std::cout << "Welcome To Ipl Analyser System" << std::endl;
+    }
+
+    void display_top_batting_avg(std::string fields)
+    {
+        ipl_run<T> most_run = analyser.find_data(fields);
+        view.display_top_batting_avg_with_name(most_run.player, most_run.avg);
+    }
+};
