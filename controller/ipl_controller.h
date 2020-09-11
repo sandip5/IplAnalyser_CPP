@@ -152,6 +152,7 @@ public:
             STRIKE_RATE,
             ECONOMY_RATE,
             STRIKE_RATE_5W_4W,
+            BOWLING_AVG_STRIKE_RATE,
             CLEAR_SCREEN,
             EXIT
         };
@@ -161,8 +162,9 @@ public:
         while (start)
         {
             std::cout << "\n1. Find Top Batting Average\n2. Find Top Strike Rate Of Bowler"
-                        << "\n3. Find Best Economy Rate\n4. Find Best Strike Rate With 5W And 4W\n5. Clear Screen" 
-                        << "\n6. Exit\n" << std::endl;
+                        << "\n3. Find Best Economy Rate\n4. Find Best Strike Rate With 5W And 4W"
+                        << "\n5. Find Great Balling Average With Best Strike Rate"  
+                        << "\n6. Clear Screen\n7. Exit\n" << std::endl;
         
             switch (view.take_input_as_choice())
             {
@@ -177,6 +179,9 @@ public:
                 break;
             case choice::STRIKE_RATE_5W_4W:
                 find_best_strike_with_5w_4w();
+                break;    
+            case choice::BOWLING_AVG_STRIKE_RATE:
+                find_bowling_avg_with_strike_rate();
                 break;                         
             case choice::CLEAR_SCREEN:
                 system("cls");
@@ -290,6 +295,12 @@ public:
         display_best_strike_with_5w_4w();
     }
 
+    void find_bowling_avg_with_strike_rate()
+    {
+        this -> bowler = analyser.find_bowling_avg_with_strike_rate();
+        display_bowling_avg_with_strike_rate();
+    }
+
     void display_top_bowling_average()
     {
         view.display_top_avg_with_name(bowler.get_player_name(), bowler.get_average());
@@ -309,5 +320,11 @@ public:
     {
         view.display_best_strike_rate_with_4w_and_5w_with_name(bowler.get_player_name(),
                                     bowler.get_strike_rate(), bowler.get_four_wkts(), bowler.get_five_wkts());
+    }
+
+    void display_bowling_avg_with_strike_rate()
+    {
+        view.display_great_average_with_best_strike_rate_with_name(bowler.get_player_name(),
+                                                    bowler.get_average(), bowler.get_strike_rate());
     }
 };

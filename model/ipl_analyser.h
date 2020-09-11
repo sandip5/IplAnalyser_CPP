@@ -211,5 +211,20 @@ public:
 
         return records[records.size() - 1];
     }
+
+    ipl_wkts find_bowling_avg_with_strike_rate()
+    {
+        std::vector<ipl_wkts> records = bowler_records;
+
+        std::sort(records.begin(), records.end(),[] (
+           ipl_wkts &first_bowler, ipl_wkts &second_bowler) -> bool
+            {
+                return ((first_bowler.get_average() < second_bowler.get_average())
+                            && (first_bowler.get_strike_rate() < second_bowler.get_strike_rate()));
+            }
+        );
+
+        return records[records.size() - 1];
+    }
 };
 
