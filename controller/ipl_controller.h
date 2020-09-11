@@ -29,14 +29,15 @@ public:
         {
             TOP_BATTING_AVG = 1,
             TOP_STRIKING_RATE,
+            MAX_SIXS_AND_FOURS,
             CLEAR_SCREEN,
             EXIT
         };
 
         while (start)
         {
-            std::cout << "1. Find Top Batting Average\n2. Find Top Striking Rate" 
-                        << "\n3. Clear Screen\n4. Exit\n" << std::endl;
+            std::cout << "1. Find Top Batting Average\n2. Find Top Striking Rate\n3. Find Max 6(s) And 4(s)" 
+                        << "\n4. Clear Screen\n5. Exit\n" << std::endl;
             switch (view.take_input_as_choice())
             {
             case choice::TOP_BATTING_AVG:
@@ -44,7 +45,10 @@ public:
                 break;
             case choice::TOP_STRIKING_RATE:
                 find_top_striking_rate();
-                break;    
+                break;
+            case choice::MAX_SIXS_AND_FOURS:
+                find_max_sixs_and_fours();
+                break;        
             case choice::CLEAR_SCREEN:
                 system("cls");
                 break;
@@ -76,6 +80,12 @@ public:
        display_top_strike_rate();
     }
 
+    void find_max_sixs_and_fours()
+    {
+        this -> batsman = analyser.find_max_sixs_and_fours();
+        display_max_six_and_four();
+    }
+
     void display_top_batting_avg()
     {
         view.display_top_batting_avg_with_name(batsman.get_player_name(), batsman.get_average());
@@ -84,5 +94,11 @@ public:
     void display_top_strike_rate()
     {
         view.display_top_strike_rate_with_name(batsman.get_player_name(), batsman.get_strike_rate());
+    }
+
+    void display_max_six_and_four()
+    {
+        view.display_max_six_and_four_with_player_name(batsman.get_player_name(), batsman.get_six(),
+                                                        batsman.get_four());
     }
 };
