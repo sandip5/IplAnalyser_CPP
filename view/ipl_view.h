@@ -55,7 +55,7 @@ void ipl_view::display_best_strike_rate_with_best_six_and_four_with_name(std::st
 void ipl_view::display_great_average_with_best_strike_rate_with_name(std::string cricketer_name, double batting_avg,
                                                                                 double strike_rate)
 {
-    std::cout << "Name Of Cricketer: " << cricketer_name << "\nBatting Average: " << batting_avg 
+    std::cout << "Name Of Cricketer: " << cricketer_name << "\nAverage: " << batting_avg 
                  << "\nStrike Rate: "<< strike_rate << std::endl;
 }
 
