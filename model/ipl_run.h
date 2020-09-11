@@ -1,11 +1,9 @@
 #include <iostream>
-#include <unordered_map>
-#include <variant>
 
 class ipl_run 
 {    
-    std::string player, high_score;
-    int match, innings, run, hundred, fifty, fours, six;
+    std::string player;
+    int run, hundred, fifty, fours, six;
     double  avg, strike_rate;
 
 public:
@@ -18,36 +16,6 @@ public:
     std::string get_player_name()
     {
         return player;
-    }
-
-    void set_high_score(std::string high_score)
-    {
-        this -> high_score = high_score;
-    }
-
-    std::string get_high_score()
-    {
-        return high_score;
-    }
-
-    void set_match(int match)
-    {
-        this -> match = match;
-    }
-
-    int get_match()
-    {
-        return match;
-    }
-
-    void set_innings(int innings)
-    {
-        this -> innings = innings;
-    }
-
-    int get_innings()
-    {
-        return innings;
     }
 
     void set_run(int run)
