@@ -149,6 +149,7 @@ public:
         enum choice
         {
             TOP_BOWLING_AVG = 1,
+            STRIKE_RATE,
             CLEAR_SCREEN,
             EXIT
         };
@@ -157,13 +158,17 @@ public:
 
         while (start)
         {
-            std::cout << "1. Find Top Batting Average\n2. Clear Screen\n3. Exit\n" << std::endl;
+            std::cout << "1. Find Top Batting Average\n2. Find Top Strike Rate Of Bowler"
+                        << "\n3. Clear Screen\n4. Exit\n" << std::endl;
         
             switch (view.take_input_as_choice())
             {
             case choice::TOP_BOWLING_AVG:
                 find_top_bowling_average();
-                break;              
+                break;
+            case choice::STRIKE_RATE:
+                find_top_strike_rate_of_bowler();
+                break;                 
             case choice::CLEAR_SCREEN:
                 system("cls");
                 break;
@@ -258,8 +263,19 @@ public:
         display_top_bowling_average();
     }
 
+    void find_top_strike_rate_of_bowler()
+    {
+        this -> bowler = analyser.find_top_strike_rate_of_bowler();
+        display_top_strike_rate_of_bowler();
+    }
+
     void display_top_bowling_average()
     {
         view.display_top_avg_with_name(bowler.get_player_name(), bowler.get_average());
+    }
+
+    void display_top_strike_rate_of_bowler()
+    {
+        view.display_top_strike_rate_with_name(bowler.get_player_name(), bowler.get_strike_rate());
     }
 };
