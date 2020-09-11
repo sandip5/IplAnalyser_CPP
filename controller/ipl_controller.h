@@ -32,6 +32,7 @@ public:
             MAX_SIXS_AND_FOURS,
             STRIKE_RATE_SIX_FOUR,
             AVERAGE_AND_STRIKE_RATE,
+            RUNS_WITH_AVERAGE,
             CLEAR_SCREEN,
             EXIT
         };
@@ -40,7 +41,7 @@ public:
         {
             std::cout << "1. Find Top Batting Average\n2. Find Top Striking Rate\n3. Find Max 6(s) And 4(s)" 
                         << "\n4. Find Best Strike Rate With Best Six And Four\n5. Find Great Average With Best Strike"
-                        << "\n6. Clear Screen\n7. Exit\n" 
+                        << "\n6. Find Maximum Runs With Best Averages\n7. Clear Screen\n8. Exit\n" 
                         << std::endl;
             switch (view.take_input_as_choice())
             {
@@ -58,7 +59,10 @@ public:
                 break;
             case choice::AVERAGE_AND_STRIKE_RATE:
                 find_great_average_with_best_strike_rate();
-                break;               
+                break;
+            case choice::RUNS_WITH_AVERAGE:
+                find_maximum_runs_with_best_average();
+                break;                   
             case choice::CLEAR_SCREEN:
                 system("cls");
                 break;
@@ -108,6 +112,12 @@ public:
         display_great_average_with_best_strike_rate();
     }
 
+    void find_maximum_runs_with_best_average()
+    {
+        this -> batsman = analyser.find_maximum_runs_with_best_average();
+        display_maximum_runs_with_best_average();
+    }
+
     void display_top_batting_avg()
     {
         view.display_top_batting_avg_with_name(batsman.get_player_name(), batsman.get_average());
@@ -134,5 +144,11 @@ public:
     {
         view.display_great_average_with_best_strike_rate_with_name(batsman.get_player_name(), 
                                             batsman.get_average(), batsman.get_strike_rate());
+    }
+
+    void display_maximum_runs_with_best_average()
+    {
+        view.display_maximum_runs_with_best_average_with_name(batsman.get_player_name(), 
+                                            batsman.get_run(), batsman.get_average());
     }
 };
