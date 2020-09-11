@@ -7,6 +7,8 @@ public:
     void display_top_batting_avg_with_name(std::string cricketer_name, double batting_avg);
     void display_top_strike_rate_with_name(std::string cricketer_name, double strike_rate);
     void display_max_six_and_four_with_player_name(std::string cricketer_name, int six, int four);
+    void display_best_strike_rate_with_best_six_and_four_with_name(std::string cricketer_name, 
+                                                            double strike_rate, int six, int four);
 };
 
 int ipl_view::take_input_as_choice()
@@ -34,4 +36,11 @@ void ipl_view::display_max_six_and_four_with_player_name(std::string cricketer_n
 {
     std::cout << "Name Of Cricketer: " << cricketer_name << "\nToatl Sixs: "
             << six << "\nToatl Fours: " << four << std::endl;
+}
+
+void ipl_view::display_best_strike_rate_with_best_six_and_four_with_name(std::string cricketer_name, 
+                                                            double strike_rate, int six, int four)
+{
+    std::cout << "Name Of Cricketer: " << cricketer_name << "\nTop Strike Rate: "<< strike_rate 
+                << "\nToatl Sixs: " << six << "\nToatl Fours: " << four << std::endl;
 }

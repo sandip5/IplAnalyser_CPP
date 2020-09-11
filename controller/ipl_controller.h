@@ -30,6 +30,7 @@ public:
             TOP_BATTING_AVG = 1,
             TOP_STRIKING_RATE,
             MAX_SIXS_AND_FOURS,
+            STRIKE_RATE_SIX_FOUR,
             CLEAR_SCREEN,
             EXIT
         };
@@ -37,7 +38,8 @@ public:
         while (start)
         {
             std::cout << "1. Find Top Batting Average\n2. Find Top Striking Rate\n3. Find Max 6(s) And 4(s)" 
-                        << "\n4. Clear Screen\n5. Exit\n" << std::endl;
+                        << "\n4. Find Best Strike Rate With Best Six And Four\n5. Clear Screen\n6. Exit\n" 
+                        << std::endl;
             switch (view.take_input_as_choice())
             {
             case choice::TOP_BATTING_AVG:
@@ -48,7 +50,10 @@ public:
                 break;
             case choice::MAX_SIXS_AND_FOURS:
                 find_max_sixs_and_fours();
-                break;        
+                break; 
+            case choice::STRIKE_RATE_SIX_FOUR:
+                find_best_strike_rate_with_best_six_and_four();
+                break;           
             case choice::CLEAR_SCREEN:
                 system("cls");
                 break;
@@ -86,6 +91,12 @@ public:
         display_max_six_and_four();
     }
 
+    void find_best_strike_rate_with_best_six_and_four()
+    {
+        this -> batsman = analyser.find_best_strike_rate_with_best_six_and_four();
+        display_best_strike_rate_with_best_six_and_four();
+    }
+
     void display_top_batting_avg()
     {
         view.display_top_batting_avg_with_name(batsman.get_player_name(), batsman.get_average());
@@ -100,5 +111,11 @@ public:
     {
         view.display_max_six_and_four_with_player_name(batsman.get_player_name(), batsman.get_six(),
                                                         batsman.get_four());
+    }
+
+    void display_best_strike_rate_with_best_six_and_four()
+    {
+        view.display_best_strike_rate_with_best_six_and_four_with_name(batsman.get_player_name(), 
+                                batsman.get_strike_rate(), batsman.get_six(), batsman.get_four());
     }
 };
