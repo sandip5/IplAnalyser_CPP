@@ -9,6 +9,8 @@ public:
     void display_max_six_and_four_with_player_name(std::string cricketer_name, int six, int four);
     void display_best_strike_rate_with_best_six_and_four_with_name(std::string cricketer_name, 
                                                             double strike_rate, int six, int four);
+    void display_great_average_with_best_strike_rate_with_name(std::string cricketer_name, double batting_avg,
+                                                                                double strike_rate);                                                      
 };
 
 int ipl_view::take_input_as_choice()
@@ -34,13 +36,20 @@ void ipl_view::display_top_strike_rate_with_name(std::string cricketer_name, dou
 
 void ipl_view::display_max_six_and_four_with_player_name(std::string cricketer_name, int six, int four)
 {
-    std::cout << "Name Of Cricketer: " << cricketer_name << "\nToatl Sixs: "
-            << six << "\nToatl Fours: " << four << std::endl;
+    std::cout << "Name Of Cricketer: " << cricketer_name << "\nSixs: "
+            << six << "\nFours: " << four << std::endl;
 }
 
 void ipl_view::display_best_strike_rate_with_best_six_and_four_with_name(std::string cricketer_name, 
                                                             double strike_rate, int six, int four)
 {
-    std::cout << "Name Of Cricketer: " << cricketer_name << "\nTop Strike Rate: "<< strike_rate 
-                << "\nToatl Sixs: " << six << "\nToatl Fours: " << four << std::endl;
+    std::cout << "Name Of Cricketer: " << cricketer_name << "\nStrike Rate: "<< strike_rate 
+                << "\nSixs: " << six << "\nFours: " << four << std::endl;
+}
+
+void ipl_view::display_great_average_with_best_strike_rate_with_name(std::string cricketer_name, double batting_avg,
+                                                                                double strike_rate)
+{
+    std::cout << "Name Of Cricketer: " << cricketer_name << "\nBatting Average: " << batting_avg 
+                 << "\nStrike Rate: "<< strike_rate << std::endl;
 }

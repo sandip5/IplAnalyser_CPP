@@ -31,6 +31,7 @@ public:
             TOP_STRIKING_RATE,
             MAX_SIXS_AND_FOURS,
             STRIKE_RATE_SIX_FOUR,
+            AVERAGE_AND_STRIKE_RATE,
             CLEAR_SCREEN,
             EXIT
         };
@@ -38,7 +39,8 @@ public:
         while (start)
         {
             std::cout << "1. Find Top Batting Average\n2. Find Top Striking Rate\n3. Find Max 6(s) And 4(s)" 
-                        << "\n4. Find Best Strike Rate With Best Six And Four\n5. Clear Screen\n6. Exit\n" 
+                        << "\n4. Find Best Strike Rate With Best Six And Four\n5. Find Great Average With Best Strike"
+                        << "\n6. Clear Screen\n7. Exit\n" 
                         << std::endl;
             switch (view.take_input_as_choice())
             {
@@ -53,7 +55,10 @@ public:
                 break; 
             case choice::STRIKE_RATE_SIX_FOUR:
                 find_best_strike_rate_with_best_six_and_four();
-                break;           
+                break;
+            case choice::AVERAGE_AND_STRIKE_RATE:
+                find_great_average_with_best_strike_rate();
+                break;               
             case choice::CLEAR_SCREEN:
                 system("cls");
                 break;
@@ -97,6 +102,12 @@ public:
         display_best_strike_rate_with_best_six_and_four();
     }
 
+    void find_great_average_with_best_strike_rate()
+    {
+        this -> batsman = analyser.find_great_average_with_best_strike_rate();
+        display_great_average_with_best_strike_rate();
+    }
+
     void display_top_batting_avg()
     {
         view.display_top_batting_avg_with_name(batsman.get_player_name(), batsman.get_average());
@@ -117,5 +128,11 @@ public:
     {
         view.display_best_strike_rate_with_best_six_and_four_with_name(batsman.get_player_name(), 
                                 batsman.get_strike_rate(), batsman.get_six(), batsman.get_four());
+    }
+
+    void display_great_average_with_best_strike_rate()
+    {
+        view.display_great_average_with_best_strike_rate_with_name(batsman.get_player_name(), 
+                                            batsman.get_average(), batsman.get_strike_rate());
     }
 };

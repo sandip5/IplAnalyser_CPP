@@ -90,5 +90,18 @@ public:
 
         return player_records[player_records.size() - 1];
     }
+
+    ipl_run find_great_average_with_best_strike_rate()
+    {
+        std::sort(player_records.begin(), player_records.end(),[] (
+           ipl_run &first_batsman, ipl_run &second_batsman) -> bool
+            {
+                return ((first_batsman.get_average() < second_batsman.get_average()) && 
+                            (first_batsman.get_strike_rate() < second_batsman.get_strike_rate()));
+            }
+        );
+
+        return player_records[player_records.size() - 1];
+    }
 };
 
