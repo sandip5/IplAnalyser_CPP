@@ -28,19 +28,23 @@ public:
         enum choice
         {
             TOP_BATTING_AVG = 1,
+            TOP_STRIKING_RATE,
             CLEAR_SCREEN,
             EXIT
         };
 
         while (start)
         {
-            std::cout << "1. Find Top Batting Average" 
-                        << "\n2. Clear Screen\n3. Exit\n" << std::endl;
+            std::cout << "1. Find Top Batting Average\n2. Find Top Striking Rate" 
+                        << "\n3. Clear Screen\n4. Exit\n" << std::endl;
             switch (view.take_input_as_choice())
             {
             case choice::TOP_BATTING_AVG:
                 find_top_batting_average();
                 break;
+            case choice::TOP_STRIKING_RATE:
+                find_top_striking_rate();
+                break;    
             case choice::CLEAR_SCREEN:
                 system("cls");
                 break;
@@ -66,9 +70,19 @@ public:
         display_top_batting_avg();
     }
 
+    void find_top_striking_rate()
+    {
+       this -> batsman = analyser.find_top_striking_rate();
+       display_top_strike_rate();
+    }
+
     void display_top_batting_avg()
     {
-        view.display_top_batting_avg_with_name(batsman.get_player_name(),
-             batsman.get_average());
+        view.display_top_batting_avg_with_name(batsman.get_player_name(), batsman.get_average());
+    }
+
+    void display_top_strike_rate()
+    {
+        view.display_top_strike_rate_with_name(batsman.get_player_name(), batsman.get_strike_rate());
     }
 };
