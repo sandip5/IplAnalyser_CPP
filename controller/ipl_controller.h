@@ -153,6 +153,7 @@ public:
             ECONOMY_RATE,
             STRIKE_RATE_5W_4W,
             BOWLING_AVG_STRIKE_RATE,
+            MAX_WKTS_BOWLING_AVERAGE,
             CLEAR_SCREEN,
             EXIT
         };
@@ -163,8 +164,9 @@ public:
         {
             std::cout << "\n1. Find Top Batting Average\n2. Find Top Strike Rate Of Bowler"
                         << "\n3. Find Best Economy Rate\n4. Find Best Strike Rate With 5W And 4W"
-                        << "\n5. Find Great Balling Average With Best Strike Rate"  
-                        << "\n6. Clear Screen\n7. Exit\n" << std::endl;
+                        << "\n5. Find Great Balling Average With Best Strike Rate"
+                        << "\n6. Find Maximum Wickets With Best Bowling Average"  
+                        << "\n7. Clear Screen\n8. Exit\n" << std::endl;
         
             switch (view.take_input_as_choice())
             {
@@ -182,7 +184,10 @@ public:
                 break;    
             case choice::BOWLING_AVG_STRIKE_RATE:
                 find_bowling_avg_with_strike_rate();
-                break;                         
+                break;
+            case choice::MAX_WKTS_BOWLING_AVERAGE:
+                find_max_wkts_with_best_bowling_average();
+                break;                             
             case choice::CLEAR_SCREEN:
                 system("cls");
                 break;
@@ -301,6 +306,12 @@ public:
         display_bowling_avg_with_strike_rate();
     }
 
+    void find_max_wkts_with_best_bowling_average()
+    {
+        this -> bowler = analyser.find_max_wkts_with_best_bowling_average();
+        display_max_wkts_with_best_bowling_average();
+    }
+
     void display_top_bowling_average()
     {
         view.display_top_avg_with_name(bowler.get_player_name(), bowler.get_average());
@@ -326,5 +337,11 @@ public:
     {
         view.display_great_average_with_best_strike_rate_with_name(bowler.get_player_name(),
                                                     bowler.get_average(), bowler.get_strike_rate());
+    }
+
+    void display_max_wkts_with_best_bowling_average()
+    {
+        view.display_max_wkts_with_best_bowling_average_with_name(bowler.get_player_name(), bowler.get_wickets(),
+                                                                    bowler.get_average());
     }
 };
