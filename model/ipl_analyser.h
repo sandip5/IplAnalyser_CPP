@@ -103,5 +103,18 @@ public:
 
         return player_records[player_records.size() - 1];
     }
+
+    ipl_run find_maximum_runs_with_best_average()
+    {
+        std::sort(player_records.begin(), player_records.end(),[] (
+           ipl_run &first_batsman, ipl_run &second_batsman) -> bool
+            {
+                return ((first_batsman.get_run() < second_batsman.get_run()) && 
+                            (first_batsman.get_average() < second_batsman.get_average()));
+            }
+        );
+
+        return player_records[player_records.size() - 1];
+    }
 };
 
