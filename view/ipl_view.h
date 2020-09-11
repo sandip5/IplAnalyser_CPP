@@ -13,7 +13,9 @@ public:
                                                                                 double strike_rate);
     void display_maximum_runs_with_best_average_with_name(std::string cricketer_name, int run,
                                                                                 double batting_avg);
-    void display_beat_economy_rate_with_name(std::string cricketer_name, double economy);                                                                                                                                                                                                                                                                                   
+    void display_beat_economy_rate_with_name(std::string cricketer_name, double economy); 
+    void display_best_strike_rate_with_4w_and_5w_with_name(std::string cricketer_name, 
+                                                            double strike_rate, int four_wkts, int five_wkts);                                                                                                                                                                                                                                                                                  
 };
 
 int ipl_view::take_input_as_choice()
@@ -69,3 +71,10 @@ void ipl_view::display_beat_economy_rate_with_name(std::string cricketer_name, d
     std::cout << "Name Of Cricketer: " << cricketer_name << "\nEconomy Rate: "
             << economy << std::endl;
 }
+
+void ipl_view::display_best_strike_rate_with_4w_and_5w_with_name(std::string cricketer_name, 
+                                                        double strike_rate, int four_wkts, int five_wkts)
+{
+    std::cout << "Name Of Cricketer: " << cricketer_name << "\nStrike Rate: "<< strike_rate 
+                << "\n4w: " << four_wkts << "\n5w: " << five_wkts << std::endl;
+}                                                        

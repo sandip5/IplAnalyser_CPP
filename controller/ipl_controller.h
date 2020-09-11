@@ -151,6 +151,7 @@ public:
             TOP_BOWLING_AVG = 1,
             STRIKE_RATE,
             ECONOMY_RATE,
+            STRIKE_RATE_5W_4W,
             CLEAR_SCREEN,
             EXIT
         };
@@ -160,7 +161,8 @@ public:
         while (start)
         {
             std::cout << "\n1. Find Top Batting Average\n2. Find Top Strike Rate Of Bowler"
-                        << "\n3. Find Best Economy Rate\n4. Clear Screen\n5. Exit\n" << std::endl;
+                        << "\n3. Find Best Economy Rate\n4. Find Best Strike Rate With 5W And 4W\n5. Clear Screen" 
+                        << "\n6. Exit\n" << std::endl;
         
             switch (view.take_input_as_choice())
             {
@@ -172,7 +174,10 @@ public:
                 break;
             case choice::ECONOMY_RATE:
                 find_best_economy_rate();
-                break;                     
+                break;
+            case choice::STRIKE_RATE_5W_4W:
+                find_best_strike_with_5w_4w();
+                break;                         
             case choice::CLEAR_SCREEN:
                 system("cls");
                 break;
@@ -279,6 +284,12 @@ public:
         display_best_economy_rate();
     }
 
+    void find_best_strike_with_5w_4w()
+    {
+        this -> bowler = analyser.find_best_strike_with_5w_4w();
+        display_best_strike_with_5w_4w();
+    }
+
     void display_top_bowling_average()
     {
         view.display_top_avg_with_name(bowler.get_player_name(), bowler.get_average());
@@ -292,5 +303,11 @@ public:
     void display_best_economy_rate()
     {
         view.display_beat_economy_rate_with_name(bowler.get_player_name(), bowler.get_economy_rate());
+    }
+
+    void display_best_strike_with_5w_4w()
+    {
+        view.display_best_strike_rate_with_4w_and_5w_with_name(bowler.get_player_name(),
+                                    bowler.get_strike_rate(), bowler.get_four_wkts(), bowler.get_five_wkts());
     }
 };
