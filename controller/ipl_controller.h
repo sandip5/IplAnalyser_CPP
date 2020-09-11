@@ -107,7 +107,7 @@ public:
 
         while (start)
         {
-            std::cout << "1. Find Top Batting Average\n2. Find Top Striking Rate\n3. Find Max 6(s) And 4(s)" 
+            std::cout << "\n1. Find Top Batting Average\n2. Find Top Striking Rate\n3. Find Max 6(s) And 4(s)" 
                         << "\n4. Find Best Strike Rate With Best Six And Four\n5. Find Great Average With Best Strike"
                         << "\n6. Find Maximum Runs With Best Averages\n7. Clear Screen\n8. Exit\n" 
                         << std::endl;
@@ -150,6 +150,7 @@ public:
         {
             TOP_BOWLING_AVG = 1,
             STRIKE_RATE,
+            ECONOMY_RATE,
             CLEAR_SCREEN,
             EXIT
         };
@@ -158,8 +159,8 @@ public:
 
         while (start)
         {
-            std::cout << "1. Find Top Batting Average\n2. Find Top Strike Rate Of Bowler"
-                        << "\n3. Clear Screen\n4. Exit\n" << std::endl;
+            std::cout << "\n1. Find Top Batting Average\n2. Find Top Strike Rate Of Bowler"
+                        << "\n3. Find Best Economy Rate\n4. Clear Screen\n5. Exit\n" << std::endl;
         
             switch (view.take_input_as_choice())
             {
@@ -168,7 +169,10 @@ public:
                 break;
             case choice::STRIKE_RATE:
                 find_top_strike_rate_of_bowler();
-                break;                 
+                break;
+            case choice::ECONOMY_RATE:
+                find_best_economy_rate();
+                break;                     
             case choice::CLEAR_SCREEN:
                 system("cls");
                 break;
@@ -269,6 +273,12 @@ public:
         display_top_strike_rate_of_bowler();
     }
 
+    void find_best_economy_rate()
+    {
+        this -> bowler = analyser.find_best_economy_rate();
+        display_best_economy_rate();
+    }
+
     void display_top_bowling_average()
     {
         view.display_top_avg_with_name(bowler.get_player_name(), bowler.get_average());
@@ -277,5 +287,10 @@ public:
     void display_top_strike_rate_of_bowler()
     {
         view.display_top_strike_rate_with_name(bowler.get_player_name(), bowler.get_strike_rate());
+    }
+
+    void display_best_economy_rate()
+    {
+        view.display_beat_economy_rate_with_name(bowler.get_player_name(), bowler.get_economy_rate());
     }
 };
