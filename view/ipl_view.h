@@ -4,7 +4,7 @@ class ipl_view
 {
 public:
     int take_input_as_choice();
-    void display_top_batting_avg_with_name(std::string cricketer_name, double batting_avg);
+    void display_top_avg_with_name(std::string cricketer_name, double avg);
     void display_top_strike_rate_with_name(std::string cricketer_name, double strike_rate);
     void display_max_six_and_four_with_player_name(std::string cricketer_name, int six, int four);
     void display_best_strike_rate_with_best_six_and_four_with_name(std::string cricketer_name, 
@@ -12,7 +12,7 @@ public:
     void display_great_average_with_best_strike_rate_with_name(std::string cricketer_name, double batting_avg,
                                                                                 double strike_rate);
     void display_maximum_runs_with_best_average_with_name(std::string cricketer_name, int run,
-                                                                                double batting_avg);                                                                                                                               
+                                                                                double batting_avg);                                                                                                                                                                                                       
 };
 
 int ipl_view::take_input_as_choice()
@@ -23,11 +23,11 @@ int ipl_view::take_input_as_choice()
     return choice;
 }
 
-void ipl_view::display_top_batting_avg_with_name(std::string cricketer_name, 
-                                                    double batting_avg)
+void ipl_view::display_top_avg_with_name(std::string cricketer_name, 
+                                                    double avg)
 {
     std::cout << "Name Of Cricketer: " << cricketer_name << "\nTop Batting Average: "
-            << batting_avg << std::endl;
+            << avg << std::endl;
 }
 
 void ipl_view::display_top_strike_rate_with_name(std::string cricketer_name, double strike_rate)
