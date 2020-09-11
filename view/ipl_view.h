@@ -15,7 +15,9 @@ public:
                                                                                 double batting_avg);
     void display_beat_economy_rate_with_name(std::string cricketer_name, double economy); 
     void display_best_strike_rate_with_4w_and_5w_with_name(std::string cricketer_name, 
-                                                            double strike_rate, int four_wkts, int five_wkts);                                                                                                                                                                                                                                                                                  
+                                                            double strike_rate, int four_wkts, int five_wkts);  
+    void display_max_wkts_with_best_bowling_average_with_name(std::string cricketer_name, int wickets,
+                                                                double avg);                                                                                                                                                                                                                                                                                                                                      
 };
 
 int ipl_view::take_input_as_choice()
@@ -77,4 +79,11 @@ void ipl_view::display_best_strike_rate_with_4w_and_5w_with_name(std::string cri
 {
     std::cout << "Name Of Cricketer: " << cricketer_name << "\nStrike Rate: "<< strike_rate 
                 << "\n4w: " << four_wkts << "\n5w: " << five_wkts << std::endl;
-}                                                        
+}   
+
+void ipl_view::display_max_wkts_with_best_bowling_average_with_name(std::string cricketer_name, int wickets,
+                                                                double avg)
+{
+    std::cout << "Name Of Cricketer: " << cricketer_name << "\nWickets: " << wickets 
+                 << "\nAverage: "<< avg << std::endl;
+}                                                                

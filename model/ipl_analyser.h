@@ -226,5 +226,20 @@ public:
 
         return records[records.size() - 1];
     }
+
+    ipl_wkts find_max_wkts_with_best_bowling_average()
+    {
+        std::vector<ipl_wkts> records = bowler_records;
+
+        std::sort(records.begin(), records.end(),[] (
+           ipl_wkts &first_bowler, ipl_wkts &second_bowler) -> bool
+            {
+                return ((first_bowler.get_wickets() < second_bowler.get_wickets())
+                            && (first_bowler.get_average() < second_bowler.get_average()));
+            }
+        );
+
+        return records[records.size() - 1];
+    }
 };
 
