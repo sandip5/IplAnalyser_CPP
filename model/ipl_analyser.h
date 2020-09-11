@@ -63,5 +63,18 @@ public:
 
         return player_records[player_records.size() - 1];
     }
+
+    ipl_run find_max_sixs_and_fours()
+    {
+        std::sort(player_records.begin(), player_records.end(),[] (
+           ipl_run &first_batsman, ipl_run &second_batsman) -> bool
+            {
+                return ((first_batsman.get_six() < second_batsman.get_six()) && 
+                            (first_batsman.get_four() < second_batsman.get_four()));
+            }
+        );
+
+        return player_records[player_records.size() - 1];
+    }
 };
 
