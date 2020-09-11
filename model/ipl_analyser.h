@@ -195,5 +195,21 @@ public:
 
         return records[records.size() - 1];
     }
+
+    ipl_wkts find_best_strike_with_5w_4w()
+    {
+        std::vector<ipl_wkts> records = bowler_records;
+
+        std::sort(records.begin(), records.end(),[] (
+           ipl_wkts &first_bowler, ipl_wkts &second_bowler) -> bool
+            {
+                return ((first_bowler.get_four_wkts() < second_bowler.get_five_wkts())
+                            && (first_bowler.get_five_wkts() < second_bowler.get_five_wkts())
+                            || (first_bowler.get_strike_rate() < second_bowler.get_strike_rate()));
+            }
+        );
+
+        return records[records.size() - 1];
+    }
 };
 
