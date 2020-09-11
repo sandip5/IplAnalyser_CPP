@@ -8,7 +8,7 @@ int main()
     ipl_analyser analyser;
     ipl_controller controller(view, analyser);
     controller.show_welcome_message();
-    controller.display_top_batting_avg("Average");
+    controller.present_screen();
     
     return 0;
 }
