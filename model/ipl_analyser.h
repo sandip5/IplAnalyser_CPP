@@ -1,6 +1,7 @@
 #include <iostream>
 #include "../utility/csv_reader.h"
 #include "ipl_run.h"
+#include <algorithm>
 
 class ipl_analyser
 {
@@ -13,6 +14,11 @@ public:
     {
         this -> csv_data = csv_reader_spc::convert_csv_to_object(file_path);
         update_player_record();
+    }
+
+    std::vector<ipl_run> get_player_record()
+    {
+        return player_records;
     }
 
     void update_player_record()
@@ -34,35 +40,16 @@ public:
         }
     }
 
-    ipl_run find_data(std::string fields)
+    ipl_run find_top_batting_average()
     {
-        sort_data(fields);
-        return player_records[0];
-    }
-
-    void sort_data(std::string fields)
-    {
-        ipl_run temp;
-
-        for (int iteration = 0; iteration < player_records.size(); iteration++)
-        {
-            int flag = 0;
-            for (int player_index = 0; player_index < player_records.size() - 1 - iteration; player_index++)
+        std::sort(player_records.begin(), player_records.end(),[] (
+           ipl_run &first_batsman, ipl_run &second_batsman) -> bool
             {
-                if (player_records[player_index].get_average() <
-                    player_records[player_index + 1].get_average())
-                {
-                    temp = player_records[player_index];
-                    player_records[player_index] = player_records[player_index + 1];
-                    player_records[player_index + 1] = temp;
-                    flag = 1;
-                }
+                return (first_batsman.get_average() < second_batsman.get_average());
             }
-            if (flag == 0)
-            {
-                break;
-            }
-        }   
+        );
+        
+        return player_records[player_records.size() - 1];
     }
 };
 
