@@ -23,7 +23,9 @@ public:
     void display_cricketer_who_had_most_runs_wickets_with_name(std::string cricketer_name, int runs,
                                                                 int wickets);  
     void display_cricketer_who_had_most_hundered_with_best_average(std::string cricketer_name, int hundred,
-                                                                double avg);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                                                                double avg);
+    void display_cricketer_who_had_zero_hundered_and_fifty_with_best_average(std::string cricketer_name,
+                                                                    double avg);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
 };
 
 int ipl_view::take_input_as_choice()
@@ -115,3 +117,8 @@ void ipl_view::display_cricketer_who_had_most_hundered_with_best_average(std::st
                  << "\nAverage: "<< avg << std::endl;
 }                                                                
                             
+void ipl_view::display_cricketer_who_had_zero_hundered_and_fifty_with_best_average(std::string cricketer_name,
+                                                                    double avg)
+{
+    std::cout << "Name Of Cricketer: " << cricketer_name << "\nAverage: "<< avg << std::endl;
+}                                                                    

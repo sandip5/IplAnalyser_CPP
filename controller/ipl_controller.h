@@ -46,6 +46,7 @@ public:
             ALL_ROUNDER_BAT_BALL_AVG,
             MOST_RUN_AND_WICKETS,
             MAX_100_AVG,
+            ZERO_HUNDERED_AND_FIFTY_BEST_AVG,
             CLEAR_SCREEN,
             EXIT
         };
@@ -63,7 +64,8 @@ public:
                         << "\n12. Find Maximum Wickets With Best Bowling Average"
                         << "\n13. Find Best Bowling Average And Batsman Average"
                         << "\n14. Find Most Runs And Wickets Cricketer"
-                        << "\n15. Find Most Max 100 And Avg\n16. Clear Screen\n17. Exit\n" 
+                        << "\n15. Find Most Max Hundered And Avg"
+                        << "\n16. Find Zero Hundered And Fifty With Best Average\n17. Clear Screen\n18. Exit\n" 
                         << std::endl;
             switch (view.take_input_as_choice())
             {
@@ -111,7 +113,10 @@ public:
                 break;
             case choice::MAX_100_AVG:
                 find_cricketer_who_had_most_hundered_with_best_average();
-                break;                     
+                break; 
+            case choice::ZERO_HUNDERED_AND_FIFTY_BEST_AVG:
+                find_cricketer_who_had_zero_hundered_and_fifty_with_best_average();
+                break;                    
             case choice::CLEAR_SCREEN:
                 system("cls");
                 break;
@@ -303,5 +308,17 @@ public:
     {
         view.display_cricketer_who_had_most_hundered_with_best_average(batsman.get_player_name(),
                                                 batsman.get_hundered(), batsman.get_average());
+    }
+
+    void find_cricketer_who_had_zero_hundered_and_fifty_with_best_average()
+    {
+        this -> batsman = analyser.find_cricketer_who_had_zero_hundered_and_fifty_with_best_average();
+        display_cricketer_who_had_zero_hundered_and_fifty_with_best_average();
+    }
+
+    void display_cricketer_who_had_zero_hundered_and_fifty_with_best_average()
+    {
+        view.display_cricketer_who_had_zero_hundered_and_fifty_with_best_average(batsman.get_player_name(),
+                                        batsman.get_average());
     }
 };

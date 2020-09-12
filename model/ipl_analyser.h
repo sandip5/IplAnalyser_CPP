@@ -294,5 +294,21 @@ public:
 
         return records.at(0);
     }
+
+    ipl_run find_cricketer_who_had_zero_hundered_and_fifty_with_best_average()
+    {
+        std::vector<ipl_run> records = batsman_records;
+
+        std::sort(records.begin(), records.end(),[] (
+           ipl_run &first_batsman, ipl_run &second_batsman) -> bool
+            {
+                return ((first_batsman.get_hundered() < second_batsman.get_hundered())
+                        && (first_batsman.get_fifty() < second_batsman.get_fifty())
+                        && (first_batsman.get_average() > second_batsman.get_average()));
+            }
+        );
+        std::cout << records.at(0).get_hundered() << " " << records.at(0).get_fifty() << std::endl;
+        return records.at(0);
+    }
 };
 
