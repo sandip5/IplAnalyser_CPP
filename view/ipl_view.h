@@ -19,7 +19,9 @@ public:
     void display_max_wkts_with_best_bowling_average_with_name(std::string cricketer_name, int wickets,
                                                                 double avg);   
     void display_batting_and_bowlimg_avg_with_name(std::string cricketer_name, double batting_avg,
-                                                                double bowling_avg);                                                                                                                                                                                                                                                                                                                                                                                               
+                                                                double bowling_avg);
+    void display_cricketer_who_had_most_runs_wickets_with_name(std::string cricketer_name, int runs,
+                                                                int wickets);                                                                                                                                                                                                                                                                                                                                                                                                                                                           
 };
 
 int ipl_view::take_input_as_choice()
@@ -95,4 +97,12 @@ void ipl_view::display_batting_and_bowlimg_avg_with_name(std::string cricketer_n
 {
     std::cout << "Name Of Cricketer: " << cricketer_name << "\nBatting Average: " << batting_avg 
                  << "\nBowling Average: "<< bowling_avg << std::endl;
-}                                                                
+} 
+
+void ipl_view::display_cricketer_who_had_most_runs_wickets_with_name(std::string cricketer_name, int runs,
+                                                                int wickets)
+{
+    std::cout << "Name Of Cricketer: " << cricketer_name << "\nRun: " << runs 
+                 << "\nWickets: "<< wickets << std::endl;
+}                                                                 
+                            
