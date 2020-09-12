@@ -9,6 +9,7 @@ class ipl_controller
     ipl_analyser analyser;
     ipl_run batsman;
     ipl_wkts bowler;
+    ipl_all_rounder all_rounder;
 
 public:
     ipl_controller(){}
@@ -26,71 +27,8 @@ public:
 
     void present_screen()
     {
-        bool is_csv_file_loaded = false;
-        int operation_for_batsman_or_bowler = 0;
+        analyser.load_ipl_csv_file(file_path_batsman, file_path_bowler);
 
-        enum choose_file
-        {
-            BATSMAN_CSV_FILE = 1,
-            BOWLER_CSV_FILE = 2
-        };
-
-        while (!is_csv_file_loaded)
-        {
-            std::cout << "\n1. Load Batsman CSV Data\n2. Load Bowler CSV Data\n" << std::endl;
-
-            switch (view.take_input_as_choice())
-            {
-            case choose_file::BATSMAN_CSV_FILE:
-            {
-                analyser.load_ipl_csv_file(file_path_batsman, choose_file::BATSMAN_CSV_FILE);
-                is_csv_file_loaded = true;
-                operation_for_batsman_or_bowler = 1;
-                break;
-            } 
-            case choose_file::BOWLER_CSV_FILE:
-            {
-                analyser.load_ipl_csv_file(file_path_bowler, choose_file::BOWLER_CSV_FILE);
-                is_csv_file_loaded = true;
-                operation_for_batsman_or_bowler = 2;
-                break;
-            }        
-            default:
-                std::cout << "CSV Files Are Not Uploaded. For Proceed Forward Enter Valid Input.."
-                            << std::endl;
-                break;
-            }
-        }
-
-        enum operation
-        {
-            BATSMAN = 1,
-            BOWLER
-        };
-
-        bool start = true;
-        
-        while (start)
-        {
-            switch (operation_for_batsman_or_bowler)
-            {
-            case operation::BATSMAN:
-                do_operation_for_batsman();
-                start = false;
-                break;
-            case operation::BOWLER:
-                do_operation_for_bowler();
-                start = false;
-                break;  
-            default:
-                std::cout << "Some Issue..." << std::endl;
-                break;
-            }
-        }
-    }
-
-    void do_operation_for_batsman()
-    {
         enum choice
         {
             TOP_BATTING_AVG = 1,
@@ -99,6 +37,13 @@ public:
             STRIKE_RATE_SIX_FOUR,
             AVERAGE_AND_STRIKE_RATE,
             RUNS_WITH_AVERAGE,
+            TOP_BOWLING_AVG,
+            STRIKE_RATE,
+            ECONOMY_RATE,
+            STRIKE_RATE_5W_4W,
+            BOWLING_AVG_STRIKE_RATE,
+            MAX_WKTS_BOWLING_AVERAGE,
+            ALL_ROUNDER_BAT_BALL_AVG,
             CLEAR_SCREEN,
             EXIT
         };
@@ -109,7 +54,12 @@ public:
         {
             std::cout << "\n1. Find Top Batting Average\n2. Find Top Striking Rate\n3. Find Max 6(s) And 4(s)" 
                         << "\n4. Find Best Strike Rate With Best Six And Four\n5. Find Great Average With Best Strike"
-                        << "\n6. Find Maximum Runs With Best Averages\n7. Clear Screen\n8. Exit\n" 
+                        << "\n6. Find Maximum Runs With Best Averages"
+                        << "\n7. Find Top Bowling Average\n8. Find Top Strike Rate Of Bowler"
+                        << "\n9. Find Best Economy Rate\n10. Find Best Strike Rate With 5W And 4W"
+                        << "\n11. Find Great Balling Average With Best Strike Rate"
+                        << "\n12. Find Maximum Wickets With Best Bowling Average"
+                        << "\n13. Find Best Bowling Average And Batsman Average\n14. Clear Screen\n14. Exit\n" 
                         << std::endl;
             switch (view.take_input_as_choice())
             {
@@ -130,46 +80,7 @@ public:
                 break;
             case choice::RUNS_WITH_AVERAGE:
                 find_maximum_runs_with_best_average();
-                break;                   
-            case choice::CLEAR_SCREEN:
-                system("cls");
-                break;
-            case choice::EXIT:
-                start = false; 
-                break;       
-            default:
-                std::cout << "Enter Valid Choice..." << std::endl;
-                break;
-            } 
-        }
-    }
-
-    void do_operation_for_bowler()
-    {
-        enum choice
-        {
-            TOP_BOWLING_AVG = 1,
-            STRIKE_RATE,
-            ECONOMY_RATE,
-            STRIKE_RATE_5W_4W,
-            BOWLING_AVG_STRIKE_RATE,
-            MAX_WKTS_BOWLING_AVERAGE,
-            CLEAR_SCREEN,
-            EXIT
-        };
-
-        bool start = true;
-
-        while (start)
-        {
-            std::cout << "\n1. Find Top Batting Average\n2. Find Top Strike Rate Of Bowler"
-                        << "\n3. Find Best Economy Rate\n4. Find Best Strike Rate With 5W And 4W"
-                        << "\n5. Find Great Balling Average With Best Strike Rate"
-                        << "\n6. Find Maximum Wickets With Best Bowling Average"  
-                        << "\n7. Clear Screen\n8. Exit\n" << std::endl;
-        
-            switch (view.take_input_as_choice())
-            {
+                break;         
             case choice::TOP_BOWLING_AVG:
                 find_top_bowling_average();
                 break;
@@ -187,7 +98,10 @@ public:
                 break;
             case choice::MAX_WKTS_BOWLING_AVERAGE:
                 find_max_wkts_with_best_bowling_average();
-                break;                             
+                break;  
+            case choice::ALL_ROUNDER_BAT_BALL_AVG:
+                find_batting_and_bowling_avg();
+                break;                
             case choice::CLEAR_SCREEN:
                 system("cls");
                 break;
@@ -198,7 +112,7 @@ public:
                 std::cout << "Enter Valid Choice..." << std::endl;
                 break;
             } 
-        }   
+        }
     }
 
     void get_choice()
@@ -343,5 +257,17 @@ public:
     {
         view.display_max_wkts_with_best_bowling_average_with_name(bowler.get_player_name(), bowler.get_wickets(),
                                                                     bowler.get_average());
+    }
+
+    void find_batting_and_bowling_avg()
+    {
+        this -> all_rounder = analyser.find_batting_and_bowling_avg();
+        display_batting_and_bowling_avg();
+    }
+
+    void display_batting_and_bowling_avg()
+    {
+        view.display_batting_and_bowlimg_avg_with_name(all_rounder.get_player_name(),
+                                                    all_rounder.get_batting_avg(), all_rounder.get_bowling_avg());
     }
 };
