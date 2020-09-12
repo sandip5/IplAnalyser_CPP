@@ -2,6 +2,7 @@
 #include "../utility/csv_reader.h"
 #include "ipl_run.h"
 #include "ipl_wkts.h"
+#include "ipl_all_rounder.h"
 #include <algorithm>
 
 class ipl_analyser
@@ -9,28 +10,16 @@ class ipl_analyser
     std::vector<std::unordered_map<std::string, std::string>> csv_data;
     std::vector<ipl_run> batsman_records;
     std::vector<ipl_wkts> bowler_records;
+    std::vector<ipl_all_rounder> all_rounder_records;
 
 public:
-    void load_ipl_csv_file(std::string file_path, int select)
+    void load_ipl_csv_file(std::string batsman_file_path, std::string bowler_file_path)
     {
-        enum choice
-        {
-            BATSMAN = 1,
-            BOWLER
-        };
-
-        this -> csv_data = csv_reader_spc::convert_csv_to_object(file_path);
-
-        if(choice::BATSMAN == select)
-        {
-            update_batsman_record();
-        }
-
-        if(choice::BOWLER == select)
-        {
-            update_bowler_record();
-        }
-        
+        this -> csv_data = csv_reader_spc::convert_csv_to_object(batsman_file_path);
+        update_batsman_record();
+        this -> csv_data = csv_reader_spc::convert_csv_to_object(bowler_file_path);
+        update_bowler_record();
+        update_all_rounder_record();
     }
 
     void update_batsman_record()
@@ -63,7 +52,27 @@ public:
             most_wkts.set_economy_rate(std::stod(itr.at("Econ")));
             bowler_records.push_back(most_wkts);
         }
-    }    
+    } 
+
+    void update_all_rounder_record()
+    {
+        for(ipl_run batsman_itr : batsman_records)
+        {
+            for (ipl_wkts bowler_itr : bowler_records)
+            {
+                if(batsman_itr.get_player_name() == bowler_itr.get_player_name())
+                {
+                    ipl_all_rounder all_rounder(batsman_itr.get_player_name());
+                    all_rounder.set_batsman_run(batsman_itr.get_run());
+                    all_rounder.set_bowler_run(bowler_itr.get_run());
+                    all_rounder.set_bowler_wickets(bowler_itr.get_wickets());
+                    all_rounder.set_batting_avg(batsman_itr.get_average());
+                    all_rounder.set_bowling_avg(bowler_itr.get_average());
+                    all_rounder_records.push_back(all_rounder);
+                }
+            }
+        }
+    }   
 
     ipl_run find_top_batting_average()
     {
@@ -72,11 +81,11 @@ public:
         std::sort(records.begin(), records.end(),[] (
            ipl_run &first_batsman, ipl_run &second_batsman) -> bool
             {
-                return (first_batsman.get_average() < second_batsman.get_average());
+                return (first_batsman.get_average() > second_batsman.get_average());
             }
         );
         
-        return records[records.size() - 1];
+        return records.at(0);
     }
 
     ipl_run find_top_striking_rate()
@@ -86,11 +95,11 @@ public:
         std::sort(records.begin(), records.end(),[] (
            ipl_run &first_batsman, ipl_run &second_batsman) -> bool
             {
-                return (first_batsman.get_strike_rate() < second_batsman.get_strike_rate());
+                return (first_batsman.get_strike_rate() > second_batsman.get_strike_rate());
             }
         );
 
-        return records[records.size() - 1];
+        return records.at(0);
     }
 
     ipl_run find_max_sixs_and_fours()
@@ -100,12 +109,12 @@ public:
         std::sort(records.begin(), records.end(),[] (
            ipl_run &first_batsman, ipl_run &second_batsman) -> bool
             {
-                return ((first_batsman.get_six() < second_batsman.get_six()) && 
-                            (first_batsman.get_four() < second_batsman.get_four()));
+                return ((first_batsman.get_six() + first_batsman.get_four() > second_batsman.get_six()
+                            + second_batsman.get_four()));
             }
         );
 
-        return records[records.size() - 1];
+        return records.at(0);
     }
 
     ipl_run find_best_strike_rate_with_best_six_and_four()
@@ -115,13 +124,13 @@ public:
         std::sort(records.begin(), records.end(),[] (
            ipl_run &first_batsman, ipl_run &second_batsman) -> bool
             {
-                return ((first_batsman.get_six() < second_batsman.get_six()) && 
-                            (first_batsman.get_six() < second_batsman.get_six()) && 
-                            (first_batsman.get_four() < second_batsman.get_four()));
+                return ((first_batsman.get_strike_rate() > second_batsman.get_strike_rate()) && 
+                            (first_batsman.get_six() + first_batsman.get_four() > second_batsman.get_six()
+                            + second_batsman.get_four()));
             }
         );
 
-        return records[records.size() - 1];
+        return records.at(0);
     }
 
     ipl_run find_great_average_with_best_strike_rate()
@@ -146,12 +155,12 @@ public:
         std::sort(records.begin(), records.end(),[] (
            ipl_run &first_batsman, ipl_run &second_batsman) -> bool
             {
-                return ((first_batsman.get_run() < second_batsman.get_run()) && 
-                            (first_batsman.get_average() < second_batsman.get_average()));
+                return ((first_batsman.get_run() > second_batsman.get_run()) && 
+                            (first_batsman.get_average() > second_batsman.get_average()));
             }
         );
 
-        return records[records.size() - 1];
+        return records.at(0);
     }
 
     ipl_wkts find_top_bowling_average()
@@ -175,11 +184,11 @@ public:
         std::sort(records.begin(), records.end(),[] (
            ipl_wkts &first_bowler, ipl_wkts &second_bowler) -> bool
             {
-                return ((first_bowler.get_strike_rate() < second_bowler.get_strike_rate()));
+                return ((first_bowler.get_strike_rate() > second_bowler.get_strike_rate()));
             }
         );
 
-        return records[records.size() - 1];
+        return records[records.size() - 2];
     }
 
     ipl_wkts find_best_economy_rate()
@@ -240,6 +249,21 @@ public:
         );
 
         return records[records.size() - 1];
+    }
+
+    ipl_all_rounder find_batting_and_bowling_avg()
+    {
+        std::vector<ipl_all_rounder> records = all_rounder_records;
+
+        std::sort(records.begin(), records.end(),[] (
+           ipl_all_rounder &first_all_rounder, ipl_all_rounder &second_all_rounder) -> bool
+            {
+                return ((first_all_rounder.get_batting_avg() > second_all_rounder.get_batting_avg()) && 
+                            (first_all_rounder.get_bowling_avg() > second_all_rounder.get_bowling_avg()));
+            }
+        );
+
+        return records.at(0);
     }
 };
 
