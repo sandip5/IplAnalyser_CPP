@@ -265,5 +265,20 @@ public:
 
         return records.at(0);
     }
+
+    ipl_all_rounder find_cricketer_who_had_most_runs_wickets()
+    {
+        std::vector<ipl_all_rounder> records = all_rounder_records;
+
+        std::sort(records.begin(), records.end(),[] (
+           ipl_all_rounder &first_all_rounder, ipl_all_rounder &second_all_rounder) -> bool
+            {
+                return ((first_all_rounder.get_batsman_run() > second_all_rounder.get_batsman_run()) && 
+                            (first_all_rounder.get_bowler_wickets() > second_all_rounder.get_bowler_wickets()));
+            }
+        );
+
+        return records.at(0);
+    }
 };
 

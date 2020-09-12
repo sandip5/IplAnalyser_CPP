@@ -44,6 +44,7 @@ public:
             BOWLING_AVG_STRIKE_RATE,
             MAX_WKTS_BOWLING_AVERAGE,
             ALL_ROUNDER_BAT_BALL_AVG,
+            MOST_RUN_AND_WICKETS,
             CLEAR_SCREEN,
             EXIT
         };
@@ -59,7 +60,8 @@ public:
                         << "\n9. Find Best Economy Rate\n10. Find Best Strike Rate With 5W And 4W"
                         << "\n11. Find Great Balling Average With Best Strike Rate"
                         << "\n12. Find Maximum Wickets With Best Bowling Average"
-                        << "\n13. Find Best Bowling Average And Batsman Average\n14. Clear Screen\n14. Exit\n" 
+                        << "\n13. Find Best Bowling Average And Batsman Average"
+                        << "\n14. Find Most Runs And Wickets Cricketer\n15. Clear Screen\n16. Exit\n" 
                         << std::endl;
             switch (view.take_input_as_choice())
             {
@@ -101,7 +103,10 @@ public:
                 break;  
             case choice::ALL_ROUNDER_BAT_BALL_AVG:
                 find_batting_and_bowling_avg();
-                break;                
+                break;
+            case choice::MOST_RUN_AND_WICKETS:
+                find_cricketer_who_had_most_runs_wickets();
+                break;                    
             case choice::CLEAR_SCREEN:
                 system("cls");
                 break;
@@ -269,5 +274,17 @@ public:
     {
         view.display_batting_and_bowlimg_avg_with_name(all_rounder.get_player_name(),
                                                     all_rounder.get_batting_avg(), all_rounder.get_bowling_avg());
+    }
+
+    void find_cricketer_who_had_most_runs_wickets()
+    {
+        this -> all_rounder = analyser.find_cricketer_who_had_most_runs_wickets();
+        display_cricketer_who_had_most_runs_wickets();
+    }
+
+    void display_cricketer_who_had_most_runs_wickets()
+    {
+        view.display_cricketer_who_had_most_runs_wickets_with_name(all_rounder.get_player_name(),
+                                            all_rounder.get_batsman_run(), all_rounder.get_bowler_run());
     }
 };
