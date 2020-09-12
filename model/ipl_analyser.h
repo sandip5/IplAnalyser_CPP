@@ -72,11 +72,11 @@ public:
         std::sort(records.begin(), records.end(),[] (
            ipl_run &first_batsman, ipl_run &second_batsman) -> bool
             {
-                return (first_batsman.get_average() < second_batsman.get_average());
+                return (first_batsman.get_average() > second_batsman.get_average());
             }
         );
         
-        return records[records.size() - 1];
+        return records.at(0);
     }
 
     ipl_run find_top_striking_rate()
@@ -86,11 +86,11 @@ public:
         std::sort(records.begin(), records.end(),[] (
            ipl_run &first_batsman, ipl_run &second_batsman) -> bool
             {
-                return (first_batsman.get_strike_rate() < second_batsman.get_strike_rate());
+                return (first_batsman.get_strike_rate() > second_batsman.get_strike_rate());
             }
         );
 
-        return records[records.size() - 1];
+        return records.at(0);
     }
 
     ipl_run find_max_sixs_and_fours()
@@ -100,12 +100,12 @@ public:
         std::sort(records.begin(), records.end(),[] (
            ipl_run &first_batsman, ipl_run &second_batsman) -> bool
             {
-                return ((first_batsman.get_six() < second_batsman.get_six()) && 
-                            (first_batsman.get_four() < second_batsman.get_four()));
+                return ((first_batsman.get_six() + first_batsman.get_four() > second_batsman.get_six()
+                            + second_batsman.get_four()));
             }
         );
 
-        return records[records.size() - 1];
+        return records.at(0);
     }
 
     ipl_run find_best_strike_rate_with_best_six_and_four()
@@ -115,13 +115,13 @@ public:
         std::sort(records.begin(), records.end(),[] (
            ipl_run &first_batsman, ipl_run &second_batsman) -> bool
             {
-                return ((first_batsman.get_six() < second_batsman.get_six()) && 
-                            (first_batsman.get_six() < second_batsman.get_six()) && 
-                            (first_batsman.get_four() < second_batsman.get_four()));
+                return ((first_batsman.get_strike_rate() > second_batsman.get_strike_rate()) && 
+                            (first_batsman.get_six() + first_batsman.get_four() > second_batsman.get_six()
+                            + second_batsman.get_four()));
             }
         );
 
-        return records[records.size() - 1];
+        return records.at(0);
     }
 
     ipl_run find_great_average_with_best_strike_rate()
@@ -146,12 +146,12 @@ public:
         std::sort(records.begin(), records.end(),[] (
            ipl_run &first_batsman, ipl_run &second_batsman) -> bool
             {
-                return ((first_batsman.get_run() < second_batsman.get_run()) && 
-                            (first_batsman.get_average() < second_batsman.get_average()));
+                return ((first_batsman.get_run() > second_batsman.get_run()) && 
+                            (first_batsman.get_average() > second_batsman.get_average()));
             }
         );
 
-        return records[records.size() - 1];
+        return records.at(0);
     }
 
     ipl_wkts find_top_bowling_average()
@@ -175,11 +175,11 @@ public:
         std::sort(records.begin(), records.end(),[] (
            ipl_wkts &first_bowler, ipl_wkts &second_bowler) -> bool
             {
-                return ((first_bowler.get_strike_rate() < second_bowler.get_strike_rate()));
+                return ((first_bowler.get_strike_rate() > second_bowler.get_strike_rate()));
             }
         );
 
-        return records[records.size() - 1];
+        return records[records.size() - 2];
     }
 
     ipl_wkts find_best_economy_rate()
