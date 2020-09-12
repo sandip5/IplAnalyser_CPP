@@ -307,7 +307,7 @@ public:
                         && (first_batsman.get_average() > second_batsman.get_average()));
             }
         );
-        std::cout << records.at(0).get_hundered() << " " << records.at(0).get_fifty() << std::endl;
+        
         return records.at(0);
     }
 };
