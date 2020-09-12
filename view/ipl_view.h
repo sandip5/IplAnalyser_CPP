@@ -21,7 +21,9 @@ public:
     void display_batting_and_bowlimg_avg_with_name(std::string cricketer_name, double batting_avg,
                                                                 double bowling_avg);
     void display_cricketer_who_had_most_runs_wickets_with_name(std::string cricketer_name, int runs,
-                                                                int wickets);                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+                                                                int wickets);  
+    void display_cricketer_who_had_most_hundered_with_best_average(std::string cricketer_name, int hundred,
+                                                                double avg);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
 };
 
 int ipl_view::take_input_as_choice()
@@ -104,5 +106,12 @@ void ipl_view::display_cricketer_who_had_most_runs_wickets_with_name(std::string
 {
     std::cout << "Name Of Cricketer: " << cricketer_name << "\nRun: " << runs 
                  << "\nWickets: "<< wickets << std::endl;
-}                                                                 
+}  
+
+void ipl_view::display_cricketer_who_had_most_hundered_with_best_average(std::string cricketer_name, int hundred,
+                                                                double avg)
+{
+    std::cout << "Name Of Cricketer: " << cricketer_name << "\nHundered: " << hundred 
+                 << "\nAverage: "<< avg << std::endl;
+}                                                                
                             

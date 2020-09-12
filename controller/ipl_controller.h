@@ -45,6 +45,7 @@ public:
             MAX_WKTS_BOWLING_AVERAGE,
             ALL_ROUNDER_BAT_BALL_AVG,
             MOST_RUN_AND_WICKETS,
+            MAX_100_AVG,
             CLEAR_SCREEN,
             EXIT
         };
@@ -61,7 +62,8 @@ public:
                         << "\n11. Find Great Balling Average With Best Strike Rate"
                         << "\n12. Find Maximum Wickets With Best Bowling Average"
                         << "\n13. Find Best Bowling Average And Batsman Average"
-                        << "\n14. Find Most Runs And Wickets Cricketer\n15. Clear Screen\n16. Exit\n" 
+                        << "\n14. Find Most Runs And Wickets Cricketer"
+                        << "\n15. Find Most Max 100 And Avg\n16. Clear Screen\n17. Exit\n" 
                         << std::endl;
             switch (view.take_input_as_choice())
             {
@@ -106,7 +108,10 @@ public:
                 break;
             case choice::MOST_RUN_AND_WICKETS:
                 find_cricketer_who_had_most_runs_wickets();
-                break;                    
+                break;
+            case choice::MAX_100_AVG:
+                find_cricketer_who_had_most_hundered_with_best_average();
+                break;                     
             case choice::CLEAR_SCREEN:
                 system("cls");
                 break;
@@ -286,5 +291,17 @@ public:
     {
         view.display_cricketer_who_had_most_runs_wickets_with_name(all_rounder.get_player_name(),
                                             all_rounder.get_batsman_run(), all_rounder.get_bowler_run());
+    }
+
+    void find_cricketer_who_had_most_hundered_with_best_average()
+    {
+        this -> batsman = analyser.find_cricketer_who_had_most_hundered_with_best_average();
+        display_cricketer_who_had_most_hundered_with_best_average();
+    }
+
+    void display_cricketer_who_had_most_hundered_with_best_average()
+    {
+        view.display_cricketer_who_had_most_hundered_with_best_average(batsman.get_player_name(),
+                                                batsman.get_hundered(), batsman.get_average());
     }
 };
