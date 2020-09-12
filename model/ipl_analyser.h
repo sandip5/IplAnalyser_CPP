@@ -280,5 +280,19 @@ public:
 
         return records.at(0);
     }
+
+    ipl_run find_cricketer_who_had_most_hundered_with_best_average()
+    {
+        std::vector<ipl_run> records = batsman_records;
+
+        std::sort(records.begin(), records.end(),[] (
+           ipl_run &first_batsman, ipl_run &second_batsman) -> bool
+            {
+                return ((first_batsman.get_hundered() > second_batsman.get_hundered()));
+            }
+        );
+
+        return records.at(0);
+    }
 };
 
